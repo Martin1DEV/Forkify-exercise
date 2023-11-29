@@ -4,16 +4,30 @@
   "description": "App from course to exercise",
   "main": "index.js",
   "scripts": {
-    "start": "echo \"parcel index.html",
+    "start": "parcel index.html",
     "build": "parcel build index.html --dist-dir ./dist"
   },
   "author": "Martin1DEV",
   "license": "ISC",
   "devDependencies": {
+    "@parcel/transformer-sass": "^2.10.3",
     "parcel": "^2.10.3"
   },
   "dependencies": {
-    "core.js": "^0.4.2",
+    "core-js": "^3.33.3",
     "regenerator-runtime": "^0.14.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Martin1DEV/Forkify-exercise.git"
+  },
+  "keywords": [
+    "exercise",
+    "forkify",
+    "repo"
+  ],
+  "bugs": {
+    "url": "https://github.com/Martin1DEV/Forkify-exercise/issues"
+  },
+  "homepage": "https://github.com/Martin1DEV/Forkify-exercise#readme"
 }

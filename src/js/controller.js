@@ -1,6 +1,7 @@
 import icons from 'url:../img/icons.svg';
-import 'core.js/stable';
+import 'core-js/stable';
 import 'regenerator-runtime/runtime';
+import * as model from './model';
 
 const recipeContainer = document.querySelector('.recipe');
 
@@ -13,7 +14,7 @@ const timeout = function (s) {
 };
 
 const newF = (function () {
-  console.log('jhdjd');
+  console.log(model.state);
 })();
 
 // https://forkify-api.herokuapp.com/v2
