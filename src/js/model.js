@@ -3,10 +3,12 @@ import { URL } from './config';
 export const state = {
   recipe: {},
   query: '',
+  recipes: [],
 };
 
 export const loadRecipe = async function (id) {
   try {
+    if (!id) return;
     const response = await fetch(
       `https://forkify-api.herokuapp.com/api/v2/recipes/${id}`
     );
@@ -23,9 +25,25 @@ export const loadRecipe = async function (id) {
       cookingTime: recipe.cooking_time,
       ingredients: recipe.ingredients,
     };
-    console.log(state);
   } catch (err) {
     throw err;
-    //TODO-----------------add error handling and search
   }
+};
+
+export const loadSearch = async function (search) {
+  state.query = search;
+  const res = await fetch(
+    `https://forkify-api.herokuapp.com/api/v2/recipes?search=${search}`
+  );
+  const data = await res.json();
+  const { recipes } = data.data;
+  state.recipes = recipes.map(rec => {
+    return {
+      publisher: rec.publisher,
+      imageURL: rec.image_url,
+      title: rec.title,
+      id: rec.id,
+    };
+  });
+  console.log(state.recipes);
 };

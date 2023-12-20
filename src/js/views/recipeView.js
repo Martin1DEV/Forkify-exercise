@@ -1,23 +1,26 @@
 import icons from 'url:../../img/icons.svg';
 
 class RecipeView {
-  _parentEl;
+  _parentEl = document.querySelector('.recipe');
   _data;
 
   render(recipe) {
+    if (!recipe) return;
     this._data = recipe;
-    this._parentEl = document.querySelector('.recipe');
+
     const markup = this._generateMarkup(this._data);
-    this._clear();
+
     this._renderSpinner();
+    this._clear();
     this._parentEl.insertAdjacentHTML('afterbegin', markup);
   }
 
-  renderError() {
-    this._renderSpinner();
+  renderError(err) {
+    console.log(err);
   }
 
   _renderSpinner() {
+    this._clear();
     const markup = `<div class="spinner">
     <svg>
       <use href="${icons}.svg#icon-loader"></use>
@@ -29,8 +32,7 @@ class RecipeView {
   _clear() {
     this._parentEl.innerHTML = '';
   }
-  _generateMarkup(recipe) {
-    console.log('rendering');
+  _generateMarkup() {
     return `<figure class="recipe__fig">
     <img src="${this._data.image}" alt="Tomato" class="recipe__img" />
     <h1 class="recipe__title">
