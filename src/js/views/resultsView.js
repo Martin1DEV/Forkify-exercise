@@ -43,7 +43,6 @@ class ResultsView {
   render(recipes) {
     this._data = recipes;
     const markup = this._generateMarkup();
-    console.log(markup);
 
     this._parentEl.insertAdjacentHTML('afterbegin', markup);
   }

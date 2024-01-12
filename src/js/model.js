@@ -4,6 +4,7 @@ export const state = {
   recipe: {},
   query: '',
   recipes: [],
+  curPage: 1,
 };
 
 export const loadRecipe = async function (id) {
@@ -45,5 +46,12 @@ export const loadSearch = async function (search) {
       id: rec.id,
     };
   });
-  console.log(state.recipes);
+};
+
+export const changePage = async function (curP) {
+  state.curPage = curP;
+  const minIndex = (curP - 1) * 10;
+  const maxIndex = minIndex + 10;
+
+  console.log(state.recipes.slice(minIndex, maxIndex));
 };

@@ -5,6 +5,7 @@ import * as model from './model';
 import RecipeView from './views/recipeView';
 import SearchView from './views/searchView';
 import ResultsView from './views/resultsView';
+import paginationView from './views/paginationView';
 // const recipeContainer = document.querySelector('.recipe');
 
 const timeout = function (s) {
@@ -28,11 +29,18 @@ const recipeController = async function () {
   }
 };
 
-const searchControler = async function (search) {
+const paginationController = async function (curPage) {
+  await model.changePage(curPage);
+  paginationView.render(5, model.state.curPage);
+  ResultsView.render(model.state.recipes);
+};
+
+const searchController = async function (search) {
   try {
     await model.loadSearch(search);
     ResultsView.clear();
     ResultsView.render(model.state.recipes);
+    paginationView.render(5, model.state.curPage);
   } catch (err) {
     alert(err);
   }
@@ -40,7 +48,8 @@ const searchControler = async function (search) {
 
 const init = function () {
   RecipeView.addHandlerRecipe(recipeController);
-  SearchView.addHandlerSearch(searchControler);
+  SearchView.addHandlerSearch(searchController);
+  paginationView.addHandlerPagination(paginationController);
 };
 
 init();
